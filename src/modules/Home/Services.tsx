@@ -11,7 +11,7 @@ const Services = () => {
                             <div className="overflow-hidden rounded-lg">
                                 <img src={imgCoolMateStory1} alt="#" />
                             </div>
-                            <div className="flex justify-between items-end absolute left-0 bottom-0 w-full px-6 py-6">
+                            <div className="flex justify-between items-end absolute left-0 bottom-0 w-full px-6 py-6 font-bold">
                                 <span>Câu chuyện Coolmate</span>
                                 <span className="bg-white rounded-full flex justify-center h-10 w-10">
                                     <img
@@ -28,7 +28,7 @@ const Services = () => {
                             <div className="overflow-hidden rounded-lg">
                                 <img src={imgCoolMateStory1} alt="#" />
                             </div>
-                            <div className="flex justify-between items-end absolute left-0 bottom-0 w-full px-6 py-6">
+                            <div className="flex justify-between items-end absolute left-0 bottom-0 w-full px-6 py-6 font-bold">
                                 <span>Dịch vụ hài lòng 100%</span>
                                 <span className="bg-white rounded-full flex justify-center h-10 w-10">
                                     <img
