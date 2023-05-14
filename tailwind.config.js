@@ -8,10 +8,24 @@ export default {
                 blueText: "#0939b2",
                 yellowText: "#f9f86c",
                 grayText: "#d9d9d9",
+                blackText: "#242424",
             }),
+            minWidth: {
+                0: "0px",
+                xs: "160px",
+            },
+
             maxWidth: ({ theme, breakpoints }) => ({
+                xxxxxs: "1.75rem",
+                xs: "8.75rem",
                 s: "10rem",
+                s: "",
+                ss: "15rem",
                 x: "16.25rem",
+            }),
+            width: ({ theme }) => ({
+                bigSize: "30000px",
+                big: "3723px",
             }),
             screens: {
                 ml: "960px",
