@@ -1,10 +1,10 @@
 import React from "react";
 import { menus } from "./data";
-import iconEmail from "../../../../assets/images/icon-email.svg";
-import iconFacebook from "../../../../assets/images/icon-facebook.svg";
-import iconHotline from "../../../../assets/images/icon-hotline.svg";
-import iconInstar from "../../../../assets/images/icon-instar.svg";
-import iconYoutube from "../../../../assets/images/icon-youtube.svg";
+import iconEmail from "../../assets/images/icons/icon-email.svg";
+import iconFacebook from "../../assets/images/icons/icon-facebook.svg";
+import iconHotline from "../../assets/images/icons/icon-hotline.svg";
+import iconInstar from "../../assets/images/icons/icon-instar.svg";
+import iconYoutube from "../../assets/images/icons/icon-youtube.svg";
 const Footer = () => {
     return (
         <div className="footer bg-black text-white pb-8">
