@@ -68,22 +68,22 @@ h6 {
 html {
     min-height: 100vh;
     scroll-behavior: smooth !important;
-}
-html::-webkit-scrollbar {
-    width: 0.4rem;
-}
-
-html::-webkit-scrollbar-track {
-    background: #eee;
-}
-
-html::-webkit-scrollbar-thumb {
-    background: #aaa;
-    border-radius: 0.5rem;
-}
-
-html::-webkit-scrollbar-thumb:hover {
-    background: #999;
+    &::-webkit-scrollbar {
+        width: 0.4rem;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background: #eee;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background: #aaa;
+        border-radius: 0.5rem;
+    }
+    
+    &::-webkit-scrollbar-thumb:hover {
+        background: #999;
+    }
 }
 
 /* base settings */
@@ -124,4 +124,15 @@ html::-webkit-scrollbar-thumb:hover {
 }
 :root {
     font-family: Pangea, Helvetica, Arial, sans-serif;
+}
+
+
+// button, [type='button'], [type='reset'], [type='submit'] {
+//     background-color: inherit !important;
+// }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
