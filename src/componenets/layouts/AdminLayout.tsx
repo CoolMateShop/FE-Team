@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Layout, Menu, message } from "antd";
+import { Layout, Menu, message, MenuProps } from "antd";
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -12,8 +12,10 @@ import {
     PayCircleOutlined,
 } from "@ant-design/icons";
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
-import { AdminLogin } from "../../../pages/admin/Login";
-import "../../../sass/Admin/AdminLayout.scss";
+import { AdminLogin } from "../../pages/admin";
+import "../../sass/Admin/AdminLayout.scss";
+import AdminIcon from "../cores/AdminIcon";
+import icon from "../../assets/logo_qkit.svg";
 
 const AdminLayout = () => {
     // const location = useLocation();
@@ -24,6 +26,20 @@ const AdminLayout = () => {
         setCollapsed(!collapsed);
     };
     const { Header, Sider, Content, Footer } = Layout;
+
+    type MenuItem = Required<MenuProps>["items"][number];
+
+    function getItem(
+        label: React.ReactNode,
+        key: React.Key,
+        icon?: React.ReactNode
+    ): MenuItem {
+        return {
+            key,
+            icon,
+            label,
+        } as MenuItem;
+    }
 
     useEffect(() => {
         const handleResize = () => {
@@ -45,49 +61,63 @@ const AdminLayout = () => {
         };
     });
 
-    const items = [
-        {
-            key: "1",
-            icon: <UserOutlined />,
-            label: "User",
-            path: "users",
-        },
-        {
-            key: "2",
-            icon: <CodeSandboxOutlined />,
-            label: "Product",
-            path: "products",
-        },
-        {
-            key: "3",
-            icon: <BookOutlined />,
-            label: "Blog",
-            path: "blogs",
-        },
-        {
-            key: "4",
-            icon: <FormOutlined />,
-            label: "Bookings",
-            path: "bookings",
-        },
-        {
-            key: "5",
-            icon: <ContactsOutlined />,
-            label: "Contacts",
-            path: "contacts",
-        },
-        {
-            key: "6",
-            icon: <CommentOutlined />,
-            label: "Comments",
-            path: "comments",
-        },
-        {
-            key: "7",
-            icon: <PayCircleOutlined />,
-            label: "Bills",
-            path: "bill",
-        },
+    // const items: MenuProps['items']= [
+    //     {
+    //         key: "1",
+    //         icon: <UserOutlined />,
+    //         label: "User",
+    //         path: "users",
+    //     },
+    //     {
+    //         key: "2",
+    //         icon: <CodeSandboxOutlined />,
+    //         label: "Product",
+    //         path: "products",
+    //     },
+    //     {
+    //         key: "3",
+    //         icon: <BookOutlined />,
+    //         label: "Blog",
+    //         path: "blogs",
+    //     },
+    //     {
+    //         key: "4",
+    //         icon: <FormOutlined />,
+    //         label: "Bookings",
+    //         path: "bookings",
+    //     },
+    //     {
+    //         key: "5",
+    //         icon: <ContactsOutlined />,
+    //         label: "Contacts",
+    //         path: "contacts",
+    //     },
+    //     {
+    //         key: "6",
+    //         icon: <CommentOutlined />,
+    //         label: "Comments",
+    //         path: "comments",
+    //     },
+    //     {
+    //         key: "7",
+    //         icon: <PayCircleOutlined />,
+    //         label: "Bills",
+    //         path: "bill",
+    //     },
+    // ];
+
+    const items: MenuProps["items"] = [
+        getItem(<Link to="users">User</Link>, "1", <UserOutlined />),
+        getItem(
+            <Link to="products">Product</Link>,
+            "2",
+            <CodeSandboxOutlined />
+        ),
+        // getItem(<Link to="blogs">Blog</Link>, "3", <BookOutlined />),
+        // getItem(<Link to="bookings">Bookings</Link>, "4", <FormOutlined />),
+        getItem(<Link to="contacts">Contacts</Link>, "3", <ContactsOutlined />),
+        getItem(<Link to="comments">Comments</Link>, "4", <CommentOutlined />),
+        getItem(<Link to="bills">Bills</Link>, "5", <PayCircleOutlined />),
     ];
 
     return (
@@ -109,22 +139,13 @@ const AdminLayout = () => {
                         top: "1%",
                     }}
                 >
-                    <img
-                        src="https://senshop.tech/static/media/logo.bc588d992055212e8997a878ac242940.svg"
-                        alt="logo"
-                        style={{ width: "100%" }}
-                    />
+                    <img src={icon} alt="logo" style={{ width: "50%" }} />
                 </div>
-                <Menu mode="inline" defaultSelectedKeys={["1"]}>
-                    {items.map((item) => {
-                        return (
-                            <Menu.Item key={item.key} icon={item.icon}>
-                                {item.label}
-                                {/* <Link to={item.path} /> */}
-                            </Menu.Item>
-                        );
-                    })}
-                </Menu>
+                <Menu
+                    mode="inline"
+                    defaultSelectedKeys={["0"]}
+                    items={items}
+                ></Menu>
             </Sider>
             <Layout className="site-layout">
                 <Header
@@ -146,7 +167,7 @@ const AdminLayout = () => {
                         }
                     )}
                     Welcome to Admin!
-                    <AdminLogin />
+                    <AdminIcon />
                 </Header>
                 <Content
                     className="site-layout-background"
