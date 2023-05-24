@@ -9,7 +9,11 @@ export default {
                 yellowText: "#f9f86c",
                 grayText: "#d9d9d9",
                 blackText: "#242424",
+                pinkBg: "#FAEEDC",
             }),
+            backgroundImage: {
+                star: "url('../../assets/images/icons/star.svg')",
+            },
             minWidth: {
                 0: "0px",
                 xs: "160px",
@@ -19,7 +23,6 @@ export default {
                 xxxxxs: "1.75rem",
                 xs: "8.75rem",
                 s: "10rem",
-                s: "",
                 ss: "15rem",
                 x: "16.25rem",
             }),

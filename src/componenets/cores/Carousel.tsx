@@ -10,7 +10,7 @@ const Carousel = ({
     settingCarousel: carouselSetting;
     children: React.ReactNode;
 }) => {
-    const settings = {
+    const settings: carouselSetting = {
         // dots: true,
         // infinite: true,
         // slidesToShow: ,
@@ -22,7 +22,7 @@ const Carousel = ({
         dots: settingCarousel.dots ? settingCarousel.dots : false,
         fade: settingCarousel.fade ? settingCarousel.fade : false,
         infinite: settingCarousel.infinite ? settingCarousel.infinite : false,
-        speed: settingCarousel.speed ? settingCarousel.speed : 0,
+        speed: settingCarousel.speed ? settingCarousel.speed : 500,
         autoplay: settingCarousel.autoplay ? settingCarousel.autoplay : false,
         slidesToShow: settingCarousel.slidesToShow
             ? settingCarousel.slidesToShow
@@ -38,9 +38,11 @@ const Carousel = ({
             : false,
     };
     return (
-        <div>
-            <Slider {...settings}>{children}</Slider>
-        </div>
+        <>
+            <div>
+                <Slider {...settings}>{children}</Slider>
+            </div>
+        </>
     );
 };
 
