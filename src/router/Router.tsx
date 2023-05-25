@@ -8,7 +8,7 @@ const AdminLayout = lazy(() => import("../componenets/layouts/AdminLayout"));
 
 const RouterView: IRouter[] = [
     {
-        path: "/",
+        path: "",
         public: true,
         name: "Layout",
         element: () => <Layout />,

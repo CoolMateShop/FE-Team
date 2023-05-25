@@ -2,41 +2,20 @@ import React, { useState } from "react";
 import ColorOption from "../cores/ColorOption";
 import SizeOption from "../cores/SizeOption";
 import img from "../../assets/images/home/xanhbongdem2.png";
-import imgStar from "../../assets/images/star.svg";
+import imgStar from "../../assets/images/icons/star.svg";
+import { Link } from "react-router-dom";
 const Product = ({ product }: { product: product }) => {
-    let colorData: productDetail[] = [product.product_details[0]];
+    const [colors, setColors] = useState<productColor[]>(
+        product.product_colors
+    );
 
-    product.product_details.map((productDetail) => {
-        // colorData.map((color) => {
-        //     if (color.colorName != productDetail.colorName) {
-        //         colorData = [...colorData, productDetail];
-        //         console.log(color.colorName);
-
-        //     }
-        // });
-        // colorData.forEach((color) => {
-        //     if (color.colorName != productDetail.colorName) {
-        //         colorData.push(productDetail);
-        //     } else {
-        //         return;
-        //     }
-        // });
-        for (let index = 0; index < colorData.length; index++) {
-            if (colorData[index].colorName != productDetail.colorName) {
-                colorData.push(productDetail);
-                console.log(colorData[index].colorName);
-                return;
-            }
-        }
-    });
-
-    const [colors, setColors] = useState<productDetail[]>(colorData);
-
-    console.log(colors);
-    // const [size, setSize] = useState<string[]>();
+    const [sizes, setSizes] = useState<productDetail[]>(
+        product.product_colors[0].product_details
+    );
     const [border, setBorder] = useState<number>(colors[0].id);
-    const handleChangeColor = (item: productDetail) => {
+    const handleChangeColor = (item: productColor) => {
         setBorder(item.id);
+        setSizes(item.product_details);
     };
     return (
         <>
@@ -46,7 +25,13 @@ const Product = ({ product }: { product: product }) => {
                         {/* image */}
                         <div className="mb-3">
                             <div>
-                                <img src={img} alt="" className="rounded-3xl" />
+                                <Link to={`/products/${product.id}`}>
+                                    <img
+                                        src={img}
+                                        alt=""
+                                        className="rounded-3xl"
+                                    />
+                                </Link>
                             </div>
                             <span className="absolute h-5 flex justify-center items-center rounded-lg text-xs top-3 right-4 px-2 font-bold bg-[#f9f86c]">
                                 Sắp hết
@@ -70,45 +55,71 @@ const Product = ({ product }: { product: product }) => {
                                 </div>
                             </div>
                         </div>
-
-                        {/* color */}
-                        <div className="mb-3">
-                            <div className="flex flex-wrap ">
-                                {colors.map((color, index) => {
-                                    return (
-                                        <ColorOption
-                                            key={index}
-                                            active={
-                                                border == color.id
-                                                    ? true
-                                                    : false
-                                            }
-                                            color={color}
-                                            onclick={(item) =>
-                                                handleChangeColor(item)
-                                            }
-                                        />
-                                    );
-                                })}
+                        <div className="px-2">
+                            {/* color */}
+                            <div className="mb-3">
+                                <div className="flex flex-wrap ">
+                                    {colors.map((color, index) => {
+                                        return (
+                                            <ColorOption
+                                                key={index}
+                                                active={
+                                                    border == color.id
+                                                        ? true
+                                                        : false
+                                                }
+                                                color={color}
+                                                onclick={(item) =>
+                                                    handleChangeColor(item)
+                                                }
+                                            />
+                                        );
+                                    })}
+                                </div>
                             </div>
-                        </div>
-                        {/* size */}
-                        <div className="mb-3">
-                            <div className="flex flex-wrap ">
-                                <SizeOption />
+                            {/* size */}
+                            <div className="mb-3">
+                                <div className="flex flex-wrap ">
+                                    {sizes.map((size, index) => {
+                                        return (
+                                            <SizeOption
+                                                key={index}
+                                                size={size}
+                                            />
+                                        );
+                                    })}
+                                </div>
                             </div>
-                        </div>
-                        {/* name */}
-                        <h3 className=" text-sm mb-3 font-medium">
-                            <a href="#">{product.name}</a>
-                        </h3>
-                        <div className="flex text-sm font-bold">
-                            <div className="mr-3">149.000đ</div>
-
-                            <del className="mr-3 text-[#c4c4c4] line-through">
-                                289.000đ
-                            </del>
-                            <div className="mr-3 text-red-600">-48%</div>
+                            {/* name */}
+                            <h3 className=" text-sm mb-3 font-medium">
+                                <a href="#">{product.name}</a>
+                            </h3>
+                            <div className="flex text-sm font-bold">
+                                <div className="mr-3">
+                                    {(
+                                        product.price -
+                                        (product.price * product.sale) / 100
+                                    ).toLocaleString("it-IT", {
+                                        style: "currency",
+                                        currency: "VND",
+                                    })}
+                                </div>
+                                <div
+                                    className={
+                                        product.sale > 0 ? "flex" : "hidden"
+                                    }
+                                >
+                                    <del className="mr-3 text-[#c4c4c4] line-through">
+                                        {product.price.toLocaleString("it-IT", {
+                                            style: "currency",
+                                            currency: "VND",
+                                        })}
+                                    </del>
+                                    <div className="mr-3 text-red-600">
+                                        {product.sale + "%"}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

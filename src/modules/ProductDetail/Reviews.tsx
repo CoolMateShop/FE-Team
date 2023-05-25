@@ -24,7 +24,7 @@ const Reviews = () => {
                     <div className="ml:pl-16 ml:w-2/3">
                         <form action="">
                             {/* stars */}
-                            <div className="mb-4 fon">
+                            <div className="mb-4">
                                 {"Đánh giá :   "}
                                 <Rate
                                     defaultValue={5}

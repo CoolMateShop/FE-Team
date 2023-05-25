@@ -1,63 +1,109 @@
-import React from "react";
+import React, { useState } from "react";
 import imgStar from "../../assets/images/icons/star.svg";
 import ColorOption from "../../componenets/cores/ColorOption";
 import SizeOption from "../../componenets/cores/SizeOption";
-const ProductSummary = () => {
+const ProductSummary = ({ product }: { product: product }) => {
+    const [colors, setColors] = useState<productColor[]>(
+        product.product_colors
+    );
+
+    const [sizes, setSizes] = useState<productDetail[]>(
+        product.product_colors[0].product_details
+    );
+    const [border, setBorder] = useState<number>(colors[0].id);
+    const [bg, setBg] = useState<number>(sizes[0].id);
+    const handleChangeColor = (item: productColor) => {
+        setBorder(item.id);
+        setSizes(item.product_details);
+    };
+    const handleChangeSize = (size:productDetail)=>{
+        setBg(size.id)
+    };
     return (
         <>
             <form action="">
                 <div className="relative">
                     {/* name */}
                     <div className="text-2xl pr-20 font-bold mb-5">
-                        {"Áo Polo nam co giãn công nghệ Graphene"}
+                        {product.name}
                     </div>
-                    {/* review  */}
-                    <div className="absolute top-[6px] right-0 ml:relative ml:flex ml:flex-row ">
-                        <div className="mb-5 tracking-wider ml:mb-0">
-                            {"4.5/5"}{" "}
-                            <img
-                                className="inline-block w-4"
-                                src={imgStar}
-                                alt=""
-                            />
-                        </div>
-                        {/* sold */}
-                        <div className="text-xs tracking-wider italic  ml:ml-2 ml:flex ml:items-center">
-                            {"Đã bán: 20"}
-                        </div>
-                    </div>
+
                     {/* price */}
-                    <div className="mb-4">{"25.000đ"}</div>
+                    <div className="flex text-lg font-bold mb-5">
+                        <div className="mr-3">
+                            {(
+                                product.price -
+                                (product.price * product.sale) / 100
+                            ).toLocaleString("it-IT", {
+                                style: "currency",
+                                currency: "VND",
+                            })}
+                        </div>
+                        <div className={product.sale > 0 ? "flex" : "hidden"}>
+                            <del className="mr-3 text-[#c4c4c4] line-through">
+                                {product.price.toLocaleString("it-IT", {
+                                    style: "currency",
+                                    currency: "VND",
+                                })}
+                            </del>
+                            <div className="mr-3 text-red-600">
+                                {product.sale + "%"}
+                            </div>
+                        </div>
+                    </div>
 
                     {/* colors */}
                     <div>
                         <div className="mb-1">
                             <span>
-                                {"Màu sắc: "} <span>{"Màu xám  "}</span>
+                                {"Màu sắc: "}{" "}
+                                <span>
+                                    {colors.map((color, index) => {
+                                        if (color.id == border) {
+                                            return color.color;
+                                        }
+                                    })}
+                                </span>
                             </span>
                         </div>
                         <div className="mb-3">
                             <div className="flex flex-wrap ">
-                                <div className="relative mr-4 before:transition-all  before:rounded-xl before:border-2 before:absolute before:top-0 before:left-0 before:w-full before:h-full before:border-solid before:border-black">
-                                    <div className="w-20 h-5 rounded-lg ml:rounded-xl mx-1 my-1 bg-slate-500"></div>
-                                </div>
-                                <div className="relative before:transition-all  before:rounded-xl before:border-2 before:absolute before:top-0 before:left-0 before:w-full before:h-full before:border-solid before:border-black">
-                                    <div className="w-20 h-5 rounded-lg ml:rounded-xl mx-1 my-1 bg-slate-500"></div>
-                                </div>
+                                {colors.map((color, index) => {
+                                    return (
+                                        <ColorOption
+                                            key={index}
+                                            active={
+                                                border == color.id
+                                                    ? true
+                                                    : false
+                                            }
+                                            color={color}
+                                            onclick={(item) =>
+                                                handleChangeColor(item)
+                                            }
+                                        />
+                                    );
+                                })}
                             </div>
                         </div>
                     </div>
                     {/* size */}
                     <div>
                         <div className="mb-1">
-                            <span>
-                                {"Kích thước: "} <span>{"XL"}</span>
-                            </span>
+                            <span>{"Kích thước: "}</span>
                         </div>
                         <div className="mb-3">
                             <div className="flex flex-wrap ">
-                                <SizeOption />
-                                <SizeOption />
+                                {sizes.map((size, index) => {
+                                    return (
+                                        <SizeOption key={index}
+                                        active = {
+                                            bg == size.id ?true : false
+                                        }
+                                        onclick = {handleChangeSize}
+                                        size={size} />
+                                    );
+                                })}
                             </div>
                         </div>
                     </div>

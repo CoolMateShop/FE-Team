@@ -1,9 +1,6 @@
 import React from "react";
-
-import CartProduct from "./CartProduct";
-import PricingInfo from "./PricingInfo";
-import ShippingInformation from "./ShippingInformation";
-const Main = () => {
+import { CartProduct, PricingInfo, ShippingInformation } from "../../modules";
+const Cart = () => {
     return (
         <>
             <div className="px-1 md:flex md:px-2 ">
@@ -25,4 +22,4 @@ const Main = () => {
     );
 };
 
-export default Main;
+export default Cart;
