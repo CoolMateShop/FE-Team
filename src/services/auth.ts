@@ -21,5 +21,12 @@ class AuthService {
         };
         return HttpClient.post(params);
     }  
+    public logout(): Promise<void> {
+        const params: HttpRequestParamsInterface = {
+            requiresToken: true,
+            url: `${API_ENDPOINT}/auth/logout`,
+        };
+        return HttpClient.post(params);
+    } 
 }
 export default new AuthService();
