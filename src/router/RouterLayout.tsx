@@ -1,11 +1,10 @@
-import React from "react";
 import { IRouter } from "../@type/router.type";
-import { Footer } from "../componenets/layouts";
 import Home from "../pages/user/Home";
 import ProductDetail from "../pages/user/ProductDetail";
 import Cart from "../pages/user/Cart";
 import ProductsByCategory from "../pages/user/ProductsByCategory";
 import SearchProducts from "../pages/user/SearchProducts";
+import Authentication from "../pages/user/Authentication";
 const RouterLayout: IRouter[] = [
     {
         name: "Homepage",
@@ -46,6 +45,14 @@ const RouterLayout: IRouter[] = [
         public: true,
         children: [],
         element: () => <ProductDetail />,
+    },
+    {
+        name: "Authentication",
+        path: "authentication",
+        index: false,
+        public: true,
+        children: [],
+        element: () => <Authentication />,
     },
 ];
 
