@@ -8,10 +8,21 @@ import axios from "axios";
 import { DEV_URL } from "../../@type/api.type";
 import { getAllCategories } from "../../services/header";
 import { Loader } from "../cores";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 function Header() {
+    const navigate = useNavigate();
     const [categories, setCategories] = useState<category[]>();
     const [loading, setLoading] = useState<boolean>(false);
+    const [search, setSearch] = useState<string>();
+    const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearch(event.target.value);
+    };
+    const handleNavigate = () => {
+        navigate({
+            pathname: "/search",
+            search: `?keyword=${search}&page=${1}`,
+        });
+    };
     useEffect(() => {
         getAllCategories().then((data) => {
             setCategories(data);
@@ -42,22 +53,27 @@ function Header() {
                 </div>
                 {/* search menu */}
                 <div className="relative flex justify-start">
-                    {/* menu */}
                     {/* search */}
-                    <form action="" className="relative">
+                    {search ? (
+                        // <Link to={`search/keyword=${search}&page=${1}`}>
+                        // </Link>
                         <button
-                            type="submit"
+                            onClick={handleNavigate}
                             className="absolute top-1/4 left-2 "
                         >
                             <img src={iconSearch} alt="" />
                         </button>
-                        <input
-                            type="text"
-                            placeholder="Tên sản phẩm cần tìm"
-                            name="search"
-                            className="bg-white border-solid border-2 rounded-2xl h-10 w-full py-1 pl-10"
-                        />
-                    </form>
+                    ) : (
+                        ""
+                    )}
+
+                    <input
+                        type="text"
+                        placeholder="Tên sản phẩm cần tìm"
+                        name="search"
+                        onChange={changeHandler}
+                        className="bg-white border-solid border-2 rounded-2xl h-10 w-full py-1 pl-10"
+                    />
                 </div>
 
                 {/* account and cart */}

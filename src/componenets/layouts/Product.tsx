@@ -26,11 +26,15 @@ const Product = ({ product }: { product: product }) => {
                         <div className="mb-3">
                             <div>
                                 <Link to={`/products/${product.id}`}>
-                                    <img
-                                        src={img}
-                                        alt=""
-                                        className="rounded-3xl"
-                                    />
+                                    {product ? (
+                                        <img
+                                            src={product.product_images[0].url}
+                                            alt=""
+                                            className="rounded-3xl"
+                                        />
+                                    ) : (
+                                        ""
+                                    )}
                                 </Link>
                             </div>
                             <span className="absolute h-5 flex justify-center items-center rounded-lg text-xs top-3 right-4 px-2 font-bold bg-[#f9f86c]">
@@ -92,7 +96,7 @@ const Product = ({ product }: { product: product }) => {
                             </div>
                             {/* name */}
                             <h3 className=" text-sm mb-3 font-medium">
-                                <a href="#">{product.name}</a>
+                                <div>{product.name}</div>
                             </h3>
                             <div className="flex text-sm font-bold">
                                 <div className="mr-3">

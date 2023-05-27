@@ -28,8 +28,18 @@ const ProductDetail = () => {
         <>
             <div className="ml:flex px-3 ml:px-10 ">
                 {/* galleryPopup */}
-                <div className="ml:w-3/5 ml:pr-16 pb-24">
-                    <CustomPaging />
+                <div className="ml:w-3/5 ml:pr-16 mb-36">
+                    {loading ? (
+                        product ? (
+                            <CustomPaging
+                                productImages={product[0].product_images}
+                            />
+                        ) : (
+                            " NOT FOUND"
+                        )
+                    ) : (
+                        <Loader />
+                    )}
                 </div>
                 {/* summary */}
                 <div className="ml:w-2/5 ml:pl-1">
@@ -50,7 +60,6 @@ const ProductDetail = () => {
                         <Loader />
                     )}
                 </div>
-                {/* description */}
             </div>
             {/* description */}
             <div className="px-3">
