@@ -7,13 +7,14 @@ import { Loader } from "../../componenets/cores";
 import { Pagination } from "antd";
 const SearchProducts = ({ match, location }: any) => {
     const params = useParams();
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
 
     const [keyword, setKeyword] = useState(searchParams.get("keyword"));
     const [products, setProducts] = useState<any>();
     const [page, setPage] = useState<any>(searchParams.get("page"));
     const [loading, setLoading] = useState(false);
+
     const handleChangePage = (page: any, pageSize: any) => {
         setPage(page);
         navigate({
@@ -21,21 +22,19 @@ const SearchProducts = ({ match, location }: any) => {
             search: `?keyword=${keyword}&page=${page}`,
         });
     };
-    if (keyword) {
-        useEffect(() => {
-            setLoading(false);
-            getSearchProducts(keyword as string, parseInt(page)).then(
-                (data) => {
-                    setProducts(data);
-                }
-            );
-            setLoading(true);
-        }, [keyword, page]);
-    }
-    
+    useEffect(() => {
+        setLoading(false);
+        getSearchProducts(keyword as string, parseInt(page)).then((data) => {
+            setProducts(data);
+        });
+        setLoading(true);
+    }, [keyword, page]);
+    // if (keyword) {
+    // }
+
     return (
         <>
-            <div className="py-5 px-2 ml:px-4 ml:py-7 max-w-full ">
+            <div className="py-1 px-2 ml:px-4 ml:py-4 max-w-full ">
                 {loading ? (
                     <div className="mb-5 font-bold text-xl">
                         {"Tìm kiếm sản phẩm có tên là:  "}
@@ -53,15 +52,16 @@ const SearchProducts = ({ match, location }: any) => {
                         : ""}
                 </div>
             </div>
-            {products? (
+            {products ? (
                 <Pagination
                     defaultCurrent={page}
                     defaultPageSize={products.per_page}
                     total={products.total}
                     onChange={handleChangePage}
                 />
-
-            ): ""}
+            ) : (
+                ""
+            )}
             ;
         </>
     );

@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Rate } from "antd";
 import ReviewItem from "./ReviewItem";
+import userComments from "../../services/comment";
 import imgStar from "../../assets/images/icons/star.svg";
-const Reviews = () => {
+import { userComment } from "../../@type/comment.type";
+import axios from "axios";
+const Reviews = ({ product }: { product: product }) => {
+    const [comments, setComments] = useState<userComment[]>();
+    useEffect(() => {
+        axios
+            .get(`http://127.0.0.1:8000/api/user_comment/${product.id}`)
+            .then((response) => {
+                setComments(response.data);
+            });
+        // userComments.getByProduct(product.id).then((data) => {
+        //     setComments(data);
+        //     console.log(data)
+        // });
+    }, []);
+
     return (
         <>
             <div className="border-t-2 border-solid border-t-grayText pt-4 mt-10">
@@ -10,9 +26,9 @@ const Reviews = () => {
                 <div className="ml:flex ml:justify-between ml:px-16">
                     {/* title */}
                     <div className="flex justify-between text-2xl font-bold mb-10 ml:w-1/3">
-                        <div>{"18 đánh giá"}</div>
+                        <div>{"1 đánh giá"}</div>
                         <div className="inline">
-                            {"4.9/5 "}{" "}
+                            {"5/5 "}{" "}
                             <img
                                 className="w-6 inline pb-2"
                                 src={imgStar}
@@ -47,9 +63,13 @@ const Reviews = () => {
                 </div>
                 {/* reviews */}
                 <div className=" border-t-2 border-solid border-t-grayText mt-8 md:flex flex-wrap">
-                    <ReviewItem />
-                    <ReviewItem />
-                    <ReviewItem />
+                    {comments
+                        ? comments.map((comment, index) => {
+                              return (
+                                  <ReviewItem key={index} comment={comment} />
+                              );
+                          })
+                        : ""}
                 </div>
             </div>
         </>

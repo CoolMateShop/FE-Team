@@ -63,11 +63,15 @@ const ProductDetail = () => {
             </div>
             {/* description */}
             <div className="px-3">
-                <ProductDescription />
+                {product ? <ProductDescription product={product} /> : ""}
             </div>
             {/* review */}
             <div className="px-3">
-                <Reviews />
+                {product
+                    ? product.map((product, index) => {
+                          return <Reviews key={index} product={product} />;
+                      })
+                    : " NOT FOUND"}
             </div>
         </>
     );

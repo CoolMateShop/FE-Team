@@ -35,7 +35,7 @@ const Login = () => {
                 localStorage.setItem(StorageKey.FULL_NAME, res.user.full_name);
                 toast.success("Đăng nhập thành công!");
                 setLoading(false);
-                navigate(-1);
+                navigate("/");
             },
             (err: any) => {
                 toast.error(`Có lỗi xảy ra!`);
@@ -79,8 +79,8 @@ const Login = () => {
                                 message: "Mật khẩu không được bỏ trống!",
                             },
                             {
-                                min: 8,
-                                message: "Độ dài từ 8 kí tự",
+                                min: 6,
+                                message: "Độ dài từ 6 kí tự",
                             },
                         ]}
                         hasFeedback
@@ -101,17 +101,7 @@ const Login = () => {
                     </Form.Item>
                 </Form>
             </div>
-            <div className="logout-another">
-                <p style={{ marginLeft: "240px", fontSize: "20px" }}>Hoặc</p>
-                <div className="facebook-google">
-                    <Button className="facebook-google--css">
-                        <a href="https://ebe9-2001-ee0-5321-4c10-ed8c-8b48-54bc-9568.ap.ngrok.io/auth/facebook">
-                            Facebook
-                        </a>
-                    </Button>
-                    <Button className="facebook-google--css">Google</Button>
-                </div>
-            </div>
+
             <div className="login--text">
                 <p>
                     Bạn chưa có tài khoản?
