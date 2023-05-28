@@ -23,19 +23,18 @@ const SearchProducts = ({ match, location }: any) => {
         });
     };
     useEffect(() => {
-        setLoading(false);
+        setLoading(true);
         getSearchProducts(keyword as string, parseInt(page)).then((data) => {
             setProducts(data);
         });
-        setLoading(true);
+        setLoading(false);
     }, [keyword, page]);
     // if (keyword) {
     // }
-
     return (
         <>
             <div className="py-1 px-2 ml:px-4 ml:py-4 max-w-full ">
-                {loading ? (
+                {!loading ? (
                     <div className="mb-5 font-bold text-xl">
                         {"Tìm kiếm sản phẩm có tên là:  "}
                         <span>{keyword}</span>
@@ -45,14 +44,22 @@ const SearchProducts = ({ match, location }: any) => {
                 )}
 
                 <div className="flex flex-wrap flex-row">
-                    {products
-                        ? products.data.map((product: any, index: any) => {
-                              return <Product key={index} product={product} />;
-                          })
-                        : ""}
+                    {!loading ? (
+                        products && products.data.length ? (
+                            products.data.map((product: any, index: any) => {
+                                return (
+                                    <Product key={index} product={product} />
+                                );
+                            })
+                        ) : (
+                            "Không tìm thấy sản phẩm"
+                        )
+                    ) : (
+                        <Loader />
+                    )}
                 </div>
             </div>
-            {products ? (
+            {products && products.data.length ? (
                 <Pagination
                     defaultCurrent={page}
                     defaultPageSize={products.per_page}
@@ -62,7 +69,6 @@ const SearchProducts = ({ match, location }: any) => {
             ) : (
                 ""
             )}
-            ;
         </>
     );
 };

@@ -12,7 +12,6 @@ export const handleClick = () => {
         location.reload();
         // navigate("/");
     });
-    console.log("vào đây");
 };
 export const items: MenuProps["items"] = [
     {

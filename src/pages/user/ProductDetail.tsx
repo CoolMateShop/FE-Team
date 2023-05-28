@@ -30,7 +30,7 @@ const ProductDetail = () => {
                 {/* galleryPopup */}
                 <div className="ml:w-3/5 ml:pr-16 mb-36">
                     {loading ? (
-                        product ? (
+                        product && product.length ? (
                             <CustomPaging
                                 productImages={product[0].product_images}
                             />
@@ -44,7 +44,7 @@ const ProductDetail = () => {
                 {/* summary */}
                 <div className="ml:w-2/5 ml:pl-1">
                     {loading ? (
-                        product ? (
+                        product && product.length ? (
                             product.map((product, index) => {
                                 return (
                                     <ProductSummary
@@ -54,7 +54,7 @@ const ProductDetail = () => {
                                 );
                             })
                         ) : (
-                            " NOT FOUND"
+                            ""
                         )
                     ) : (
                         <Loader />

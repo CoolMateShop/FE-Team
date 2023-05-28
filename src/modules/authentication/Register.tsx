@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 const Register = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<any>();
+    const [form] = Form.useForm();
     const handleFinish = (values: any) => {
         setLoading(true);
         const payload: RegisterPayload = {
@@ -24,6 +25,7 @@ const Register = () => {
             (res: any) => {
                 toast.success("Đăng ký thành công!");
                 setLoading(false);
+                form.resetFields();
             },
             (err: any) => {
                 const errors = JSON.parse(err.response.data);
@@ -42,6 +44,7 @@ const Register = () => {
             {/* {errorMessage && <p style={{color:"red", textAlign: "center", fontSize:"20px"}} >{errorMessage}</p>} */}
             <div className="Logout--form">
                 <Form
+                    form={form}
                     onFinish={handleFinish}
                     className="form--form"
                     layout="vertical"
@@ -86,8 +89,8 @@ const Register = () => {
                                 message: "Password không được bỏ trống!",
                             },
                             {
-                                min: 8,
-                                message: "Độ dài từ 8 kí tự",
+                                min: 6,
+                                message: "Độ dài từ 6 kí tự",
                             },
                         ]}
                         hasFeedback
@@ -119,8 +122,8 @@ const Register = () => {
                                 },
                             }),
                             {
-                                min: 8,
-                                message: "Độ dài từ 8 kí tự",
+                                min: 6,
+                                message: "Độ dài từ 6 kí tự",
                             },
                         ]}
                         hasFeedback
@@ -159,17 +162,7 @@ const Register = () => {
                     </Form.Item>
                 </Form>
             </div>
-            <div className="logout-another">
-                <p style={{ marginLeft: "240px", fontSize: "20px" }}>Hoặc</p>
-                <div className="facebook-google">
-                    <Button className="facebook-google--css">
-                        <a href="https://ebe9-2001-ee0-5321-4c10-ed8c-8b48-54bc-9568.ap.ngrok.io/auth/facebook">
-                            Facebook
-                        </a>
-                    </Button>
-                    <Button className="facebook-google--css">Google</Button>
-                </div>
-            </div>
+
             <div className="Logout--text" style={{ marginTop: "20px" }}>
                 <p>
                     Bạn đã có tài khoản?
