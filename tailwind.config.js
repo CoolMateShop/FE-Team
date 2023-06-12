@@ -10,6 +10,7 @@ export default {
                 grayText: "#d9d9d9",
                 blackText: "#242424",
                 pinkBg: "#FAEEDC",
+                menuHeaderHover:"#ededed",
             }),
             backgroundImage: {
                 star: "url('../../assets/images/icons/star.svg')",
