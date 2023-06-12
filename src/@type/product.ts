@@ -7,8 +7,6 @@ type product = {
     category: category
     product_colors:productColor[]
     product_images:productImage[]
-
-    
 }
 
 type productColor = {

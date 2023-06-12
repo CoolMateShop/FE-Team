@@ -3,6 +3,8 @@ import { useState } from "react";
 import { productColumn } from "../../../@type/admin.type";
 import { Loader } from "../../../componenets/cores";
 import { AdminAddProduct, AdminContentHeader } from "../../../modules";
+import ProductService from "../../../services/products";
+// import product from "../../../@type/product.ts";
 
 function AdminProduct() {
     const title = "Product Management";
