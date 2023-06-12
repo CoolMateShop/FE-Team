@@ -15,7 +15,7 @@ import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { AdminLogin } from "../../pages/admin";
 import "../../sass/Admin/AdminLayout.scss";
 import AdminIcon from "../cores/AdminIcon";
-import icon from "../../assets/logo_qkit.svg";
+import icon from "../../assets/images/logo.png";
 
 const AdminLayout = () => {
     // const location = useLocation();
@@ -191,7 +191,7 @@ const AdminLayout = () => {
                     }}
                 >
                     {" "}
-                    Sen Shop &copy;2022 Created by senshop.tech
+                    CoolmateShop &copy;2022 Created by BangNguKhoiNgu
                 </Footer>
             </Layout>
         </Layout>

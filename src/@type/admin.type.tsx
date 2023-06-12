@@ -52,15 +52,15 @@ export const billColumn = [
         sorter: (a: { id: number }, b: { id: number }) => a.id - b.id,
         width: "7%",
     },
+    // {
+    //     title: "User NI",
+    //     dataIndex: "fullName",
+    //     key: "fullName",
+    // },
     {
-        title: "First Name",
-        dataIndex: "firstName",
-        key: "firstName",
-    },
-    {
-        title: "Last Name",
-        dataIndex: "lastName",
-        key: "lastName",
+        title: "Full Name",
+        dataIndex: "fullname",
+        key: "fullName",
     },
     {
         title: "Address",
@@ -68,42 +68,47 @@ export const billColumn = [
         key: "address",
     },
     {
+        title: "Discount Id",
+        dataIndex: "discount_id",
+        key: "discountId",
+    },
+    {
         title: "Phone Number",
-        dataIndex: "numberPhone",
-        key: "numberPhone",
+        dataIndex: "phone_number",
+        key: "phoneNumber",
     },
     {
-        title: "Total",
-        dataIndex: "total",
-        key: "total",
+        title: "Note",
+        dataIndex: "note",
+        key: "note",
     },
     {
-        title: "Amount",
-        dataIndex: "amount",
-        key: "amount",
+        title: "Total Price",
+        dataIndex: "total_price",
+        key: "totalPrice",
     },
     {
-        title: "Date",
-        dataIndex: "date",
-        key: "date",
+        title: "Status",
+        dataIndex: "status",
+        key: "status",
     },
-    {
-        title: "Payment Method",
-        dataIndex: "paymentMethod",
-        key: "paymentMethod",
-        filters: [
-            {
-                text: "Transfer",
-                value: "transfer",
-            },
-            {
-                text: "Direct",
-                value: "direct",
-            },
-        ],
-        onFilter: (value: string | number | boolean, record: any) =>
-            record.paymentMethod.indexOf(value) === 0,
-    },
+    // {
+    //     title: "Payment Method",
+    //     dataIndex: "paymentMethod",
+    //     key: "paymentMethod",
+    //     filters: [
+    //         {
+    //             text: "Transfer",
+    //             value: "transfer",
+    //         },
+    //         {
+    //             text: "Direct",
+    //             value: "direct",
+    //         },
+    //     ],
+    //     onFilter: (value: string | number | boolean, record: any) =>
+    //         record.paymentMethod.indexOf(value) === 0,
+    // },
 ];
 
 export const productBillColumn = [
