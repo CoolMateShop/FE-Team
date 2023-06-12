@@ -62,23 +62,26 @@ function Header() {
     const menuList = document.querySelectorAll(".menu-nav-items");
 
     menuList.forEach((f) => {
-      f.style.display = "none";
+      f.classList.add("hidden");
     });
 
     navList[0].classList.add("bg-slate-600", "text-white");
-    menuList[0].style.display = "flex"
+    menuList[0].classList.remove("hidden");
+    menuList[0].classList.add("flex");
 
     navList.forEach((e, i) => {
-      e.addEventListener("mouseover", () => {
+      e.addEventListener("mousemove", () => {
         navList.forEach((f) => {
           f.classList.remove("bg-slate-600", "text-white");
         });
         e.classList.add("bg-slate-600", "text-white");
         menuList.forEach((f, j) => {
           if (i != j) {
-            f.style.display = "none";
+            f.classList.remove("flex");
+            f.classList.add("hidden");
           } else {
-            f.style.display = "flex";
+            f.classList.remove("hidden");
+            f.classList.add("flex");
           }
         });
       });
@@ -87,7 +90,7 @@ function Header() {
 
   return (
     <>
-      <div className="relative text-base bg-slate-300 flex justify-center items-center">
+      <div className="relative text-base bg-white flex justify-center items-center">
         <Link to={""} className="nav-items uppercase font-bold px-6 py-4">
           coolmate
         </Link>
@@ -110,7 +113,7 @@ function Header() {
 
       <div className="w-full text-sm bg-slate-400 z-20">
         {/* Coolmate */}
-        <div className="menu-nav-items flex justify-center items-center">
+        <div className="menu-nav-items flex justify-center items-center font-bold">
           <Link to={""} className="px-6 py-4 hover:bg-slate-500">
             Tất cả
           </Link>
@@ -120,7 +123,7 @@ function Header() {
           <Link to={""} className="px-6 py-4 hover:bg-slate-500">
             Bộ sưu tập
           </Link>
-          <Link to={""} className="px-6 py-4 hover:bg-slate-500">
+          <Link to={""} className="bg-rose-400 px-6 py-4 hover:bg-rose-400">
             Chạy bộ
           </Link>
           <Link to={""} className="px-6 py-4 hover:bg-slate-500">
@@ -135,13 +138,13 @@ function Header() {
           <Link to={""} className="px-6 py-4 hover:bg-slate-500">
             Phụ kiện
           </Link>
-          <Link to={""} className="px-6 py-4 hover:bg-slate-500">
+          <Link to={""} className="bg-rose-400 px-6 py-4 hover:bg-rose-400">
             Giảm 50%
           </Link>
         </div>
 
         {/* 84Rising */}
-        <div className="menu-nav-items flex justify-center items-center">
+        <div className="menu-nav-items flex justify-center items-center font-bold">
           <Link to={""} className="px-6 py-4 hover:bg-slate-500">
             Tất cả
           </Link>
@@ -172,7 +175,7 @@ function Header() {
         </div>
 
         {/* CM24 */}
-        <div className="menu-nav-items flex justify-center items-center">
+        <div className="menu-nav-items flex justify-center items-center font-bold">
           <Link to={""} className="px-6 py-4 hover:bg-slate-500">
             Combo CM24
           </Link>
